@@ -4,16 +4,14 @@ package com.gitara.Inventory;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public abstract class CinemaRoom {
+public class CinemaRoom {
     private int cinemaRoomNumber, chairsNumber, chairsPerRow, numRows;
     private Map<String, Projection> movies;
-    private boolean doorOpened;
 
     public CinemaRoom(int cinemaRoomNumber, int chairsPerRow, int numRows) {
         this.cinemaRoomNumber = cinemaRoomNumber;
         this.movies = new HashMap<>();
         this.chairsNumber = chairsPerRow * numRows;
-        this.doorOpened = false;
         this.chairsPerRow = chairsPerRow;
         this.numRows = numRows;
     }
@@ -24,7 +22,7 @@ public abstract class CinemaRoom {
         while (it.hasNext()) {
             Map.Entry<String, Projection> current = it.next();
             if (current.getValue().deleteOldMovie()) {
-                System.out.println("Removing.. " + current.getKey());
+                System.out.println("Removing -> " + current.getKey());
                 it.remove();
                 oneToRemove = true;
             }
@@ -34,8 +32,16 @@ public abstract class CinemaRoom {
         return oneToRemove;
     }
 
+    public void tryStartAllMovies () {
+        Iterator<Projection> it = movies.values().iterator();
+        while (it.hasNext()) {
+            Projection current = it.next();
+            current.startMovie();
+        }
+    }
+
     public void seeMovies () {
-        System.out.println("Next movies are available to watch..");
+        System.out.println("Next movies are available to watch in cinema room " + this.cinemaRoomNumber);
         Iterator<Map.Entry<String, Projection>> it = movies.entrySet().iterator();
         while(it.hasNext()) {
             Map.Entry<String, Projection> current = it.next();
@@ -45,7 +51,7 @@ public abstract class CinemaRoom {
 
     public void seeMovieInfo (String movieName) {
         if (movies.containsKey(movieName)) {
-            movies.get(movieName).seeChairs();
+            movies.get(movieName).info();
             return;
         }
         System.out.println("There is no movie named " + movieName);
@@ -57,6 +63,30 @@ public abstract class CinemaRoom {
             return;
         }
         System.out.println("We can't find movie you looking for..");
+    }
+
+    public boolean reserveSeat (String movieName, String seatNumber) {
+        if (movies.containsKey(movieName))
+            return movies.get(movieName).reserveSeat(seatNumber);
+        System.out.println("Can't find movie you looking for..");
+        return false;
+    }
+
+    public boolean cancelSeat (String movieName, String seatNumber) {
+        if (movies.containsKey(movieName))
+            return movies.get(movieName).cancelSeat(seatNumber);
+        System.out.println("Can't find movie you looking for..");
+        return false;
+    }
+
+    public boolean addMovie (Movie movie) {
+        if (!movies.containsKey(movie.getMovieName())) {
+            movies.put(movie.getMovieName(), new Projection(this, movie));
+            System.out.println(movie.getMovieName() + " added succesfuly");
+            return true;
+        }
+        System.out.println(movie.getMovieName() + " already added");
+        return false;
     }
 
     public boolean startMovie (String movieName) {
@@ -75,30 +105,6 @@ public abstract class CinemaRoom {
         movies.get(movieName).seeTakenChairs();
     }
 
-    public boolean reserveSeat (String movieName, String seatNumber) {
-        if (movies.containsKey(movieName))
-            return movies.get(movieName).reserveSeat(seatNumber);
-        System.out.println("Can't find movie you looking for..");
-        return false;
-    }
-
-    public boolean cancelSeat (String movieName, String seatNumber) {
-        if (movies.containsKey(movieName)) {
-            return movies.get(movieName).cancelSeat(seatNumber);
-        }
-        System.out.println("Can't find movie you looking for..");
-        return false;
-    }
-
-    public boolean addMovie (Movie movie) {
-        if (!movies.containsKey(movie.getMovieName())) {
-            movies.put(movie.getMovieName(), new Projection(this, movie));
-            System.out.println(movie.getMovieName() + " added succesfuly");
-            return true;
-        }
-        System.out.println(movie.getMovieName() + " already added");
-        return false;
-    }
 
     public int numMovies () {
         return movies.size();
@@ -128,9 +134,6 @@ public abstract class CinemaRoom {
         return numRows;
     }
 
-    public boolean isDoorOpened() {
-        return doorOpened;
-    }
 
     public Map<String, Projection> getMovies() {
         return movies;

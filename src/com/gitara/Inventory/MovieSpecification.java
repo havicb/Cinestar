@@ -3,9 +3,9 @@ package com.gitara.Inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieSpecification {
-    private String movieName, duration, director;
-    private Genre genre;
+public final class MovieSpecification {
+    private final String movieName, duration, director;
+    private final Genre genre;
 
     public MovieSpecification(String movieName, String duration, String director, Genre genre) {
         this.movieName = movieName;
@@ -18,7 +18,7 @@ public class MovieSpecification {
         String [] parts = duration.split(":");
         double sekunde = 0; int vrijednost = 3600;
         for (String current : parts) {
-            sekunde += Double.valueOf(current) * vrijednost;
+            sekunde += Double.parseDouble(current) * vrijednost;
             vrijednost/=60;
         }
         return sekunde;
@@ -39,23 +39,13 @@ public class MovieSpecification {
         return duration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-
     public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
 
     public String getDirector() {
         return director;
     }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
 }

@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc883b8a-35a4-41be-9433-937f7ac76907" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/project-template.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Cinestar.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Chair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/CinemaRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Cinestar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/FirstCinemaRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Genre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Movie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/MovieSpecification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Projection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Time.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Chair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Chair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/CinemaRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/CinemaRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Cinestar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Cinestar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/FirstCinemaRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/MovieSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/MovieSpecification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Projection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Projection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Time.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +32,7 @@
   </component>
   <component name="ProjectId" id="1TsUeNnYAnGPQv9Vq103w7jF3MK" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gitaraInventory" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -64,6 +57,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
