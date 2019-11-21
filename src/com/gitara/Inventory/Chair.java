@@ -13,7 +13,7 @@ public class Chair {
     }
 
     public void info () {
-        System.out.println("**********************");
+        System.out.println("*********************");
         System.out.println("Chair -> " + chairNum);
         System.out.println("Price -> " + price);
         System.out.println("Free -> " + !isTaken);
@@ -56,7 +56,7 @@ public class Chair {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double pric) {
         this.price = price;
     }
 }
