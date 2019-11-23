@@ -5,21 +5,20 @@ public class Chair {
     private double price;
     private boolean isFree;
 
-
     public Chair(String chairNum, double price) {
         this.chairNum = chairNum;
         this.price = price;
         this.isFree = true;
     }
 
-    public void info () {
+    public void info() {
         System.out.println("*********************");
         System.out.println("Chair -> " + chairNum);
         System.out.println("Price -> " + price);
         System.out.println("Free -> " + isFree);
     }
 
-    public boolean cancelSeat () {
+    public boolean cancelSeat() {
         if (isFree) {
             System.out.println(chairNum + " is arleady free");
             return false;
@@ -30,7 +29,7 @@ public class Chair {
         return true;
     }
 
-    public boolean reserveSeat () {
+    public boolean reserveSeat() {
         if (!isFree) {
             System.out.println(chairNum + " is already taken..");
             return false;

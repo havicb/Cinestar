@@ -4,45 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class MovieSpecification {
-    private final String movieName, duration, director;
-    private final Genre genre;
+    private final String movieName;
+    private final String director;
+    private final int movieDuration;
+    private List<Genre> genres;
 
-    public MovieSpecification(String movieName, String duration, String director, Genre genre) {
+    public MovieSpecification(String movieName, int movieDuration, String director, List<Genre> genres) {
         this.movieName = movieName;
-        this.duration = duration;
-        this.genre = genre;
+        this.movieDuration = movieDuration;
+        this.genres = new ArrayList<>();
         this.director = director;
+        addGenres(genres);
+    }
+
+    private void addGenres (List<Genre> genres) {
+        this.genres.addAll(genres);
     }
 
     public double getMovieDurationSeconds () {
-        String [] parts = duration.split(":");
-        double sekunde = 0; int vrijednost = 3600;
-        for (String current : parts) {
-            sekunde += Double.parseDouble(current) * vrijednost;
-            vrijednost/=60;
-        }
-        return sekunde;
+        return (movieDuration % 60) + (movieDuration/60);
     }
 
     public void movieSpecInfo () {
         System.out.println("Movie name -> " + movieName);
         System.out.println("Movie director -> " + director);
-        System.out.println("Duration -> " + duration);
-        System.out.println(genre.toString());
+        System.out.println("Duration -> " + movieDuration);
+        System.out.println(genres.toString());
     }
 
     public String getMovieName () {
         return movieName;
     }
 
-    public String getDuration() {
-        return duration;
+    public int getDuration() {
+        return movieDuration;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public List<Genre> getGenres() {
+        return genres;
     }
-
 
     public String getDirector() {
         return director;

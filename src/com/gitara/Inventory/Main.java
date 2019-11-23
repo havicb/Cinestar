@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Main {
 
     public static void main(String[] args) {
-        Time danasPola9 = new Time(21, 20, 30);
+       /* Time danasPola9 = new Time(21, 20, 30);
         Time danasPola10 = new Time(21, 21, 30);
         Time sutraPola9 = new Time(21, 20, 30);
         Time sutraPola10 = new Time(21, 21, 30);
@@ -25,6 +25,13 @@ public class Main {
         bcc.addMovie(secondRoom, d);
         bcc.addMovie(secondRoom, e);
         bcc.printMoviesForCinemaRoom(secondRoom);
+*/
+       MovieWatcher novi = new MovieWatcher(-5);
+       novi.addAmount(10);
+        novi.accountInfo();
+
+
+
     }
 
 }

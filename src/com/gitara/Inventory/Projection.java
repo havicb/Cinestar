@@ -1,94 +1,73 @@
 package com.gitara.Inventory;
 
+// OSMISLIT CU OVAJ PROGRAM DA BUDE KAO ZAMJENA ZA SVE RADNIKE U KINU, TJ NE BI TREBALO RADNIKA VISE BIIT
+
+
+import com.gitara.Inventory.Chairs;
+import com.gitara.Inventory.CinemaRoom;
+import com.gitara.Inventory.Movie;
+import com.gitara.Inventory.ProjectionType;
+
 public class Projection {
-    CinemaRoom cinema;
-    Movie movie;
-    Chair [] chairs;
+    private CinemaRoom room;
+    private Movie movie;
+    private Chairs chairs;
+    private ProjectionType typeProjection;
+    private Price ticketPrice;
 
-    public Projection (CinemaRoom cinema, Movie movie) {
-        this.cinema = cinema;
+
+    public Projection(CinemaRoom room, Movie movie, ProjectionType typeProjection, double regularPrice) {
+        this.room = room;
         this.movie = movie;
-        this.chairs = new Chair[cinema.getCinemaChairsNumber()];
-        this.inicijalizirajRedove(cinema.getNumRows(), cinema.getChairsPerRow());
+        typeProjection = typeProjection;
+        ticketPrice = new Price(typeProjection, regularPrice);
+        chairs = new Chairs(this.room, room.getNumberRows(), room.getChairsPerRow());
     }
 
-    private void inicijalizirajRedove (int numRows, int chairsPerRow) {
-        int lastRow = 'A' + numRows;
-        int temp = 0;
-        double price;
-        for (char row ='A'; row < lastRow; row++) {
-            for (int i = 0; i < chairsPerRow; i++)
-                chairs[temp++] = new Chair(row + Integer.toString(i+1), 0.00);
-        }
+    public boolean cancelSeat(String seatNumber) {
+        return chairs.cancelSeat(seatNumber);
     }
 
-    public boolean cancelSeat (String seatNumber) {
-        int seatNum = findSeat(seatNumber);
-        if (seatNum == -1) {
-            System.out.println("Can't find seat..");
-            return false;
-        }
-        return chairs[seatNum].cancelSeat();
+    public boolean reserveSeat(String seatNumber) {
+        return chairs.reserveSeat(seatNumber);
     }
 
-    public boolean reserveSeat (String seatNumber) {
-        int seatNum = findSeat(seatNumber);
-        if (seatNum == -1) {
-            System.out.println("Can't find seat..");
-            return false;
-        }
-        return chairs[seatNum].reserveSeat();
-    }
-
-    public void seeChairs () {
-        System.out.println("All available chairs: ");
-        for (Chair current : chairs)
-            current.info();
-    }
-
-    public void seeTakenChairs () {
-        System.out.println("Next seats are taken..");
-        for (Chair current : chairs) {
-            if (current.isFree())
-                current.info();
-        }
-    }
-
-    public void seeAvailableChairs () {
-        System.out.println("Next seats are free..");
-        for (Chair current : chairs) {
-            if (!current.isFree())
-                current.info();
-        }
-    }
-
-
-    private int findSeat (String seatNum) {
-        for (int i=0; i<chairs.length; i++) {
-            if (seatNum.equalsIgnoreCase(chairs[i].getChairNum()))
-                return i;
-        }
-        return -1;
-    }
-
-    public boolean startMovie () {
+    public boolean startMovie() {
         return movie.startMovie();
     }
 
-    public boolean stopMovie () {
+    public boolean stopMovie() {
         return movie.stopMovie();
     }
 
-    public boolean deleteOldMovie () {
+    public boolean movieValidForDeleting() {
         return movie.validStop();
     }
 
+    public void seeTakenChairs() {
+        this.chairs.seeTakenChairs();
+    }
 
-    public void info () {
+    public void seeAvailableChairs() {
+        this.chairs.seeAvailableChairs();
+    }
+
+    public void seeAllChairs() {
+        this.chairs.seeChairs();
+    }
+
+
+    public void projectionInfo() {
+        System.out.println("Room " + room.getCinemaRoomNumber());
+        System.out.println("Type projection: " +typeProjection.name());
         movie.movieInformation();
     }
 
-    public String getMovieName () {
+    public Movie movieInfo() {
+        return this.movie;
+    }
+
+    public String getMovieName() {
         return movie.getMovieName();
     }
 

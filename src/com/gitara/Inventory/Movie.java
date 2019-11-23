@@ -1,28 +1,26 @@
 package com.gitara.Inventory;
 
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 public class Movie {
     private Time movieStart;
     private MovieSpecification movieInfo;
-    private double ticketPrice;
-    private boolean isRecording;
+    private boolean started;
 
-    public Movie(String movieName, String duration, String director, Genre genre, Time startMovie) {
-        this(new MovieSpecification(movieName, duration, director, genre), startMovie);
+    public Movie(String movieName, int duration, String director, List<Genre> genres, Time startMovie) {
+        this(new MovieSpecification(movieName, duration, director, genres), startMovie);
     }
 
     public Movie(MovieSpecification movieInfo, Time startMovie) {
         this.movieInfo = movieInfo;
-        this.ticketPrice = 0.00;
         movieStart = startMovie;
     }
 
     public boolean stopMovie() {
         if (validStop()) {
             System.out.println(this.getMovieName() + " ended..");
-            isRecording = false;
+            started = false;
             return true;
         }
         System.out.println(this.getMovieName() + " isn't started or finished yet..");
@@ -30,9 +28,9 @@ public class Movie {
     }
 
     public boolean startMovie() {
-        if (!isRecording && movieStart.movieEligibleForStart()) {
+        if (!started && movieStart.movieEligibleForStart()) {
             System.out.println(this.getMovieName() + " is now starting..");
-            isRecording = true;
+            started = true;
             return true;
         }
         System.out.println("Can't start movie named " + this.getMovieName());
@@ -92,8 +90,11 @@ public class Movie {
         movieInfo.movieSpecInfo();
         System.out.print("MOVIE STARTING -> ");
         movieStart.info();
-        System.out.println("Regular ticket price ->" + ticketPrice);
-        System.out.println("Started -> " + isRecording);
+        System.out.println("Started -> " + started);
+    }
+
+    public boolean hasMovieStarted() {
+        return started;
     }
 
     public MovieSpecification getMovieInfo() {
