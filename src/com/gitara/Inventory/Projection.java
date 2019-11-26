@@ -1,59 +1,129 @@
 package com.gitara.Inventory;
 
-// OSMISLIT CU OVAJ PROGRAM DA BUDE KAO ZAMJENA ZA SVE RADNIKE U KINU, TJ NE BI TREBALO RADNIKA VISE BIIT
 
-
-import com.gitara.Inventory.Chairs;
-import com.gitara.Inventory.CinemaRoom;
-import com.gitara.Inventory.Movie;
-import com.gitara.Inventory.ProjectionType;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Projection {
     private CinemaRoom room;
+    private Time movieStart;
     private Movie movie;
-    private Chairs chairs;
     private ProjectionType typeProjection;
     private Price ticketPrice;
+    private List<Customer> soldTickets;
 
 
-    public Projection(CinemaRoom room, Movie movie, ProjectionType typeProjection, double regularPrice) {
+    public Projection(CinemaRoom room, Movie movie, ProjectionType typeProjection, Time movieStart, double regularPrice) {
         this.room = room;
         this.movie = movie;
-        typeProjection = typeProjection;
-        ticketPrice = new Price(typeProjection, regularPrice);
-        chairs = new Chairs(this.room, room.getNumberRows(), room.getChairsPerRow());
+        this.typeProjection = typeProjection;
+        this.ticketPrice = new Price(typeProjection, regularPrice);
+        this.movieStart = movieStart;
+        this.soldTickets = new ArrayList<>();
     }
 
-    public boolean cancelSeat(String seatNumber) {
-        return chairs.cancelSeat(seatNumber);
+    public boolean stopProjection() {
+        if (this.hasProjectionEnded()) {
+            System.out.println(this.getMovieName() + " ended..");
+            movie.stopMovie();
+            return true;
+        }
+        System.out.println(this.getMovieName() + " isn't started or finished yet..");
+        return false;
     }
 
-    public boolean reserveSeat(String seatNumber) {
-        return chairs.reserveSeat(seatNumber);
+    public boolean startProjection() {
+        if (movieStart.movieEligibleForStart()) {
+            System.out.println(this.getMovieName() + " is now starting..");
+            movie.startMovie();
+            return true;
+        }
+        System.out.println("Can't start movie named " + this.getMovieName());
+        return false;
     }
 
-    public boolean startMovie() {
-        return movie.startMovie();
+    public boolean projectionValidToAdd() {
+        return movieStart.movieValidForAdding();
     }
 
-    public boolean stopMovie() {
-        return movie.stopMovie();
+    public void printTimeTillEndOfProjection () {
+        Time now = new Time();
+        long secondsAfterMovieStart = this.movieStart.getSecondsAfterMovieStart(now);
+        double movieDuration = this.movie.getMovieInfo().getMovieDurationSeconds();
+        long newSeconds = (long) (movieDuration - secondsAfterMovieStart);
+        if (secondsAfterMovieStart < 0)
+            System.out.println("Movie hasn't started..");
+        else {
+            System.out.print("Time till end: ");
+            int secondsTillEnd = (int) (newSeconds % 60);
+            int hoursTillEnd = (int) (newSeconds / 60);
+            int minutesTillEnd = hoursTillEnd % 60;
+            hoursTillEnd/=60;
+            System.out.println(String.format("%02d", hoursTillEnd) + ":"+
+                    String.format("%02d", minutesTillEnd) + ":" +
+                    String.format("%02d", secondsTillEnd));
+        }
     }
 
-    public boolean movieValidForDeleting() {
-        return movie.validStop();
+    public void printTimeTillStartOfProjection() {
+        Time now = new Time();
+        long secondsMovieStart = Time.getCurrentTimeSeconds(this.movieStart);
+        long newSeconds = secondsMovieStart - Time.getCurrentTimeSeconds(now);
+        if (newSeconds < 0)
+            System.out.println("Movie is started..");
+        else {
+            System.out.print("Time till start: ");
+            int secondsTillStart = (int) (newSeconds % 60);
+            int hoursTillStart = (int) (newSeconds / 60);
+            int minutesTillStart = hoursTillStart % 60;
+            hoursTillStart/=60;
+            System.out.println(String.format("%02d", hoursTillStart) + ":"+
+                    String.format("%02d", minutesTillStart) + ":" +
+                    String.format("%02d", secondsTillStart));
+        }
+    }
+
+    protected boolean hasProjectionEnded() {
+        Time now = new Time();
+        long secondsAfterMovieStart = this.movieStart.getSecondsAfterMovieStart(now);
+        double movieDuration = this.movie.getMovieInfo().getMovieDurationSeconds();
+        return secondsAfterMovieStart > movieDuration;
+    }
+
+
+    public boolean reserveSeat(Customer customer, String seatNumber) {
+        if(customer.takeFromAccount(this.ticketPrice.getPrice()) && room.reserveSeat(seatNumber)) {
+            System.out.println("Succesfuly reserved " + seatNumber + " on name " +
+            customer.getCustomerName());
+            soldTickets.add(customer);
+            return true;
+        }
+        System.out.println(seatNumber + " isn't free or you don't have enough deposit on account..");
+    return false;
+    }
+
+
+    public boolean cancelSeat(Customer customer, String seatNumber) {
+        if(room.cancelSeat(seatNumber) && customer.addAmount(this.ticketPrice.getPrice() / 2)) {
+            System.out.println("You succesfuly canceled reservation for " + seatNumber + " seat number!");
+            System.out.println(this.ticketPrice.getPrice() / 2 + " succesfuly added to your account..");
+            soldTickets.remove(customer);
+            return true;
+        }
+        System.out.println("You can't cancel free seat..");
+    return false;
     }
 
     public void seeTakenChairs() {
-        this.chairs.seeTakenChairs();
+        this.room.seeTakenChairs();
     }
 
     public void seeAvailableChairs() {
-        this.chairs.seeAvailableChairs();
+        this.room.seeAvailableChairs();
     }
 
     public void seeAllChairs() {
-        this.chairs.seeChairs();
+        this.room.seeChairs();
     }
 
 
@@ -61,6 +131,16 @@ public class Projection {
         System.out.println("Room " + room.getCinemaRoomNumber());
         System.out.println("Type projection: " +typeProjection.name());
         movie.movieInformation();
+        System.out.print("Starting at -> ");
+        movieStart.info();
+    }
+
+    public List<Customer> getSoldTickets() {
+        return soldTickets;
+    }
+
+    public CinemaRoom accesCinemaRoom() {
+        return room;
     }
 
     public Movie movieInfo() {

@@ -28,7 +28,7 @@ public final class MovieSpecification {
     public void movieSpecInfo () {
         System.out.println("Movie name -> " + movieName);
         System.out.println("Movie director -> " + director);
-        System.out.println("Duration -> " + movieDuration);
+        System.out.println("Duration -> " + movieDuration + " min");
         System.out.println(genres.toString());
     }
 

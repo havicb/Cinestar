@@ -19,24 +19,17 @@ public class Chair {
     }
 
     public boolean cancelSeat() {
-        if (isFree) {
-            System.out.println(chairNum + " is arleady free");
+        if (isFree)
             return false;
-        }
-        System.out.println("You succesfully canceled seat " + chairNum);
         isFree = true;
-        System.out.println("Seat " + chairNum + " is now untaken..");
-        return true;
+    return true;
     }
 
     public boolean reserveSeat() {
-        if (!isFree) {
-            System.out.println(chairNum + " is already taken..");
+        if (!isFree)
             return false;
-        }
-        System.out.println("You succesfully reserved seat " + chairNum);
         isFree = false;
-        return true;
+     return true;
     }
 
     public String getChairNum() {

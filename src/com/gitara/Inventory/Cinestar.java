@@ -12,59 +12,57 @@ public class Cinestar {
         projections = new ArrayList<>();
     }
 
-    public boolean cancelSeat(Movie movie, String seatNumber) {
-        int movieIndex = findMovieIndex(movie);
-        if (movieIndex == -1)
-            return false;
-    return projections.get(movieIndex).cancelSeat(seatNumber);
+    public boolean reserveSeatForProjection(Customer customer, Projection projection, String seatNumber) {
+        int projectionIndex = projections.indexOf(projection);
+        return ((projectionIndex != -1) && (projections.get(projectionIndex).reserveSeat(customer, seatNumber)));
     }
 
-    public boolean reserveSeat(Movie movie, String seatNumber) {
-        int movieIndex = findMovieIndex(movie);
-        if (movieIndex == -1)
-            return false;
-    return projections.get(movieIndex).reserveSeat(seatNumber);
+    public boolean cancelSeatForProjection(Customer customer, Projection projection, String seatNumber) {
+        int projectionIndex = projections.indexOf(projection);
+        return ((projectionIndex != -1) && (projections.get(projectionIndex).cancelSeat(customer, seatNumber))); // JE LI BOLJE OVAKO ILI projections.get(movieIndex).accesRoom().cancelSeat(seatNumber);
     }
 
-    public void seeProjectionChairsInfo (Movie movie) {
-        int movieIndex = findMovieIndex(movie);
-        if (movieIndex == -1)
+
+    public void seeProjectionChairsInfo (Projection wantedProjection) {
+        int projectionIndex = projections.indexOf(wantedProjection);
+        if (projectionIndex == -1) {
+            System.out.println("Projection not found..");
             return;
+        }
         switch (choiceForInfo()) {
             case 1:
-                this.projections.get(movieIndex).seeAvailableChairs();
+                this.projections.get(projectionIndex).seeAvailableChairs();
                 break;
             case 2:
-                this.projections.get(movieIndex).seeTakenChairs();
+                this.projections.get(projectionIndex).seeTakenChairs();
                 break;
             case 3:
-                this.projections.get(movieIndex).seeAllChairs();
+                this.projections.get(projectionIndex).seeAllChairs();
                 break;
         }
     }
 
-    public void seeAvailableMovies() {
+    public void seeAvailableProjections() {
         Iterator<Projection> it = projections.iterator();
         while(it.hasNext()) {
             Projection current = it.next();
             current.projectionInfo();
             if (current.movieInfo().hasMovieStarted()) {
                 System.out.println("Time till movie starts -> ");
-                current.movieInfo().printTimeTillEndMovie();
+                current.printTimeTillStartOfProjection();
             }
-            else {
+            else
                 System.out.println("Time till movie ends -> ");
-                current.movieInfo().printTimeTillEndMovie();
+                current.printTimeTillEndOfProjection();
             }
         }
-    }
 
     public boolean deleteOldProjections() {
         boolean oneToRemove = false;
         Iterator<Projection> it = projections.iterator();
         while(it.hasNext()) {
             Projection current = it.next();
-            if (current.movieValidForDeleting()) {
+            if (current.hasProjectionEnded()) {
                 System.out.println("Deleting movie " + current.getMovieName());
                 it.remove();
                 oneToRemove = true;
@@ -73,15 +71,25 @@ public class Cinestar {
     return oneToRemove;
     }
 
-    public boolean addProjection(CinemaRoom room, Movie movie, double ticketPrice) {
+    public boolean addProjection(Projection newProjection) {
+        if(!projections.contains(newProjection) && newProjection.projectionValidToAdd()) {
+            System.out.println("Projection added succesfuly");
+            projections.add(newProjection);
+            return true;
+        }
+        System.out.println("Projection already exists or it is already started..");
+    return false;
+    }
+
+    public boolean addProjection(CinemaRoom room, Movie movie, Time startTime, double ticketPrice) {
         ProjectionType projectionType = ProjectionType._3D;
-        projectionType.getType(chooseProjection());
-        Projection newProjection = new Projection(room, movie, projectionType, ticketPrice);
+        projectionType = projectionType.getType(chooseProjection());
+        Projection newProjection = new Projection(room, movie, projectionType, startTime, ticketPrice);
         if (!projections.contains(newProjection)) {
             projections.add(newProjection);
             return true;
         }
-            System.out.println("Can't add projection..");
+            System.out.println("Projection already exists..");
     return false;
     }
 

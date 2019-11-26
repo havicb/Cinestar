@@ -24,7 +24,13 @@ public class Time {
 
     public boolean movieEligibleForStart () { // YOU CAN START MOVIE 15 min before or after real movie time //
         Time now = new Time(); // KREIRA VRIJEME SADA //
+        LocalDateTime todays = LocalDateTime.now();
         return eligibleTimeForStart(now);
+    }
+
+    public boolean movieValidForAdding() {
+        LocalDateTime todays = LocalDateTime.now();
+        return (currentTime.isAfter(todays));
     }
 
     private boolean eligibleTimeForStart (Time now) {

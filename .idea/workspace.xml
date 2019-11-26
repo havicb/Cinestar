@@ -2,14 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc883b8a-35a4-41be-9433-937f7ac76907" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Chair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Chair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/CinemaRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/CinemaRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Cinestar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Cinestar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Genre$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Genre.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Genre.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Movie.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Movie.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/MovieSpecification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/MovieSpecification.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Projection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Projection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Time.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Cinestar/com/gitara/Inventory/Time.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Chair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Chair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Chairs.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/CinemaRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/CinemaRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Cinestar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Cinestar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/FirstCinemaRoom.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/MovieSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/MovieSpecification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/MovieWatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Projection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Projection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/gitara/Inventory/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/gitara/Inventory/Time.java" afterDir="false" />
     </list>
@@ -32,6 +45,7 @@
   </component>
   <component name="ProjectId" id="1TsUeNnYAnGPQv9Vq103w7jF3MK" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
